@@ -8,17 +8,22 @@ let initialState = {
     { id: 3, order: "Sandwich", amount: 10 },
   ],
 };
+
+const NEW_ORDER = "NEW_ORDER";
+const EDIT_ORDER = "EDIT_ORDER";
+const DELETE_ORDER = "DELETE_ORDER";
+
 // reducer - thing that changes the state
 let reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEW_ORDER": {
+    case NEW_ORDER: {
       let newState = {
         ...state,
         orders: [...state.orders, action.payload],
       };
       return newState;
     }
-    case "CHANGE_AMOUNT": {
+    case EDIT_ORDER: {
       // expecting two things from payload: id and amount
       let { id, amount } = action.payload;
       let newState = { ...state };
@@ -29,7 +34,7 @@ let reducer = (state = initialState, action) => {
       });
       return newState;
     }
-    case "DELETE_ORDER": {
+    case DELETE_ORDER: {
       let { id } = action.payload;
       let newState = { ...state };
       newState.orders = newState.orders.filter(
@@ -45,7 +50,7 @@ let reducer = (state = initialState, action) => {
 //   let resultState = reducer(state, action);
 //   console.log(resultState);
 //   console.log(reducer(resultState, action));
-let store = Redux.createStore(reducer);
+let store = Redux.createStore(reducer, initialState);
 // When it subscribes, this will occur all the time
 store.subscribe(() => {
   console.log("State has been changed");
@@ -53,11 +58,11 @@ store.subscribe(() => {
 });
 
 let edit_croissant_order = {
-  type: "CHANGE_AMOUNT",
+  type: EDIT_ORDER,
   payload: { id: 2, amount: 6 },
 };
 let delete_order = {
-  type: "DELETE_ORDER",
+  type: DELETE_ORDER,
   payload: { id: 3 },
 };
 // call the action

@@ -4,29 +4,96 @@
 
 The purpose of this repository is to have a series of redux examples to refer to later.
 
-### How to run this package
-
-```
-npm install
-```
-
-```
-node controller.js
-```
-
 ### Where it fits :paperclip:
 
 - [ ] Manipulating state within your application
 - [ ] Understanding how your data changes as the user interacts with your application
 - [ ] Listing out the different actions
 - [ ] Listing out the event handlers that connect to those actions
-- [ ]
+- [ ] E>g.,
 
-## Important Vocabulary
+## Planning Redux
 
-| Word | Where it occurs | How it works |
-| ---- | :-------------: | :----------: |
-| Word |                 |              |
+- [ ] Knowing what data structures you are using to store your data
+- [ ] Creating a sample outline of your data
+      Let's say that your initial data structures look like this:
+
+```
+let initialState = {
+  orders: [
+    { id: 1, order: "Coffee", amount: 1 },
+    { id: 2, order: "Croissant", amount: 5 },
+    { id: 3, order: "Sandwich", amount: 10 },
+  ],
+};
+
+```
+
+- [ ] Declaring the types of actions that will be changing your data
+
+```
+const NEW_ORDER = "NEW_ORDER";
+const EDIT_ORDER = "EDIT_ORDER";
+const DELETE_ORDER = "DELETE_ORDER";
+
+```
+
+- [ ] Writing the function that will manipulate your data
+
+```let reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case NEW_ORDER: {
+      let newState = {
+        ...state,
+        orders: [...state.orders, action.payload],
+      };
+      return newState;
+    }
+    case EDIT_ORDER: {
+      // expecting two things from payload: id and amount
+      let { id, amount } = action.payload;
+      let newState = { ...state };
+      newState.orders.map((item) => {
+        if (item.id === id) {
+          item.amount = amount;
+        }
+      });
+      return newState;
+    }
+    case DELETE_ORDER: {
+      let { id } = action.payload;
+      let newState = { ...state };
+      newState.orders = newState.orders.filter(
+        (item) => item.id !== id
+      );
+      return newState;
+    }
+    default: {
+      return state;
+    }
+  }
+};
+```
+
+- [ ] Creating the action
+
+```
+let edit_croissant_order = {
+  type: EDIT_ORDER,
+  payload: { id: 2, amount: 6 },
+};
+let delete_order = {
+  type: DELETE_ORDER,
+  payload: { id: 3 },
+};
+```
+
+- [ ] Dispatching the action accordingly
+
+```
+store.dispatch(edit_croissant_order);
+store.dispatch(delete_order);
+```
 
 ### User Stories :telescope:
 
