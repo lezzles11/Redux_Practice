@@ -9,9 +9,30 @@ let initialState = {
     { id: 3, order: "Sandwich", amount: 10 },
   ],
   users: [
-    { id: 1, name: "Lesley", age: 36 },
-    { id: 2, name: "Ryan", age: 39 },
-    { id: 3, name: "Robert", age: 33 },
+    {
+      id: 1,
+      email: "lesleyc@bu.edu",
+      password: "password",
+      spotify_id: "spotify_id",
+      spotify_access_token: "spotify_access_token",
+      timestamp: "",
+    },
+    {
+      id: 2,
+      email: "ryan@bu.edu",
+      password: "password",
+      spotify_id: "spotify_id",
+      spotify_access_token: "spotify_access_token",
+      timestamp: "",
+    },
+    {
+      id: 3,
+      email: "robert@bu.edu",
+      password: "password",
+      spotify_id: "spotify_id",
+      spotify_access_token: "spotify_access_token",
+      timestamp: "",
+    },
   ],
 };
 
@@ -19,6 +40,11 @@ const NEW_ORDER = "NEW_ORDER";
 const EDIT_ORDER = "EDIT_ORDER";
 const DELETE_ORDER = "DELETE_ORDER";
 const CHANGE_AGE = "CHANGE_AGE";
+const ADD_USER = "ADD_USER";
+const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
+const GET_USER = "GET_USER";
+const DELETE_USER = "DELETE_USER";
+const GET_ALL_USERS = "GET_ALL_USERS";
 
 // reducer - thing that changes the state
 let orderReducer = (state = initialState, action) => {
@@ -59,15 +85,31 @@ let orderReducer = (state = initialState, action) => {
 };
 
 let userReducer = (state = initialState, action) => {
+  console.log("User reducer: ", state.users);
   switch (action.type) {
-    case CHANGE_AGE: {
-      let { id, age } = action.payload;
+    case ADD_USER: {
+      let newState = {
+        ...state,
+        users: [...state.users, action.payload],
+      };
+      return newState;
+    }
+    case EDIT_USER_PASSWORD: {
+      let { id, password } = action.payload;
       let newState = { ...state };
       newState.users.map((item) => {
         if (item.id === id) {
-          item.age = age;
+          item.password = password;
         }
       });
+      return newState;
+    }
+    case DELETE_USER: {
+      let { id } = action.payload;
+      let newState = { ...state };
+      newState.users = newState.users.filter(
+        (user) => user.id !== id
+      );
       return newState;
     }
     default: {
@@ -90,6 +132,10 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
+/**********************************************
+ * Actions to test
+ * ==================================
+ ***********************************************/
 let edit_croissant_order = {
   type: EDIT_ORDER,
   payload: { id: 2, amount: 6 },
@@ -98,11 +144,32 @@ let delete_order = {
   type: DELETE_ORDER,
   payload: { id: 3 },
 };
-let change_age = {
-  type: CHANGE_AGE,
-  payload: { id: 1, age: 37 },
+let edit_user = {
+  type: EDIT_USER_PASSWORD,
+  payload: { id: 1, password: "newPassword" },
 };
+let delete_user = {
+  type: DELETE_USER,
+  payload: { id: 2 },
+};
+let add_user = {
+  type: ADD_USER,
+  payload: {
+    id: 4,
+    payload: {
+      id: 4,
+      email: "dad@bu.edu",
+      password: "password",
+      spotify_id: "spotify_id",
+      spotify_access_token: "spotify_access_token",
+      timestamp: "",
+    },
+  },
+};
+
 // call the action
 store.dispatch(edit_croissant_order);
 store.dispatch(delete_order);
-store.dispatch(change_age);
+store.dispatch(edit_user);
+store.dispatch(delete_user);
+store.dispatch(add_user);

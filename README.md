@@ -17,7 +17,7 @@ The purpose of this repository is to have a series of redux examples to refer to
 - [ ] Make sure all components accept props
 - [ ] Ensure by first giving it fake data
 - [ ] For functions, create the appropriate method, then pass state of the array into the method accordingly
-- [ ]
+- [ ] 
 
 ### Where it fits :paperclip:
 
@@ -55,7 +55,8 @@ const DELETE_ORDER = "DELETE_ORDER";
 
 - [ ] Writing the function that will manipulate your data
 
-```let reducer = (state = initialState, action) => {
+```
+let reducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_ORDER: {
       let newState = {
