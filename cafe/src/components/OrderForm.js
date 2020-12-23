@@ -12,6 +12,8 @@ class OrderForm extends Component {
   addOrder = (event) => {
     console.log("clicked");
     event.preventDefault();
+
+    this.props.addOrder(this.state);
     console.log(this.state);
   };
   handleChange = (event) => {

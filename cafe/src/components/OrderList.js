@@ -1,18 +1,6 @@
 import React, { Component } from "react";
 
 class OrderList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      orders: [
-        { id: 1, order: "Coffee", amount: 1 },
-        { id: 2, order: "Croissant", amount: 5 },
-        { id: 3, order: "Sandwich", amount: 10 },
-      ],
-    };
-    this.deleteOrder = this.deleteOrder.bind(this);
-    this.loadOrders = this.loadOrders.bind(this);
-  }
   /**********************************************
    * DeleteOrder
    * ==================================
@@ -54,7 +42,7 @@ class OrderList extends Component {
     return list;
   };
   render() {
-    let orders = this.state.orders;
+    let orders = this.props.orders;
     return (
       <div>
         <h6>List of orders</h6>

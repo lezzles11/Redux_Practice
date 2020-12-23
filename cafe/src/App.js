@@ -14,14 +14,19 @@ class App extends React.Component {
       ],
     };
   }
+  addOrder = (order) => {
+    let { orders } = this.state;
+    orders.push(order);
+    this.setState({ orders });
+  };
   render() {
     return (
       <div className="container">
         <h5>My New Cafe</h5>
-        <OrderForm />
+        <OrderForm addOrder={this.addOrder} />
         <OrderCounter count={this.state.orders.length} />
 
-        <OrderList />
+        <OrderList orders={this.state.orders} />
       </div>
     );
   }
