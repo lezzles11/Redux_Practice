@@ -24,8 +24,8 @@ class App extends React.Component {
       <div className="container">
         <h5>My New Cafe</h5>
         <OrderForm addOrder={this.addOrder} />
-        <OrderCounter count={this.state.orders.length} />
-        <OrderList orders={this.state.orders} />
+        <OrderCounter />
+        <OrderList />
       </div>
     );
   }

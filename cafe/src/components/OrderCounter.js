@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 class OrderCounter extends Component {
   render() {
     return (
@@ -13,4 +13,7 @@ class OrderCounter extends Component {
   }
 }
 
-export default OrderCounter;
+const mapStateToProps = (state) => ({
+  count: state.orders.length,
+});
+export default connect(mapStateToProps, null)(OrderCounter);

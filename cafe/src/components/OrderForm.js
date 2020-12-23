@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { addOrder } from "../redux/actions/orderActions";
 class OrderForm extends Component {
   constructor(props) {
     super(props);
@@ -58,4 +59,4 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+export default connect(null, { addOrder })(OrderForm);

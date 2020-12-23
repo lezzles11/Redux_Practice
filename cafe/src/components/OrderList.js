@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class OrderList extends Component {
   /**********************************************
@@ -51,5 +52,8 @@ class OrderList extends Component {
     );
   }
 }
-
-export default OrderList;
+// This is taken from the reducers
+const mapStateToProps = (state) => ({
+  orders: state.orders,
+});
+export default connect(mapStateToProps, null)(OrderList);
