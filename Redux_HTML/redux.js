@@ -13,7 +13,9 @@ const GET_ALL_USER_TABLE = "GET_ALL_USER_TABLE";
 const ADD_FRIEND = "ADD_FRIEND";
 const EDIT_FRIEND = "EDIT_FRIEND";
 const DELETE_FRIEND = "DELETE_FRIEND";
-
+const ADD_CATEGORY = "ADD_CATEGORY";
+const EDIT_CATEGORY = "EDIT_CATEGORY";
+const DELETE_CATEGORY = "DELETE_CATEGORY";
 
 const initialState = {
   orders: [
@@ -116,6 +118,14 @@ const initialState = {
       answered: true,
       timestamp: "",
     },
+    {
+      id: 2,
+      user_id: 2,
+      user_friend_id: 1,
+      question_id: 2,
+      answered: true,
+      timestamp: "",
+    },
   ],
 };
 
@@ -188,7 +198,53 @@ let userReducer = (state = initialState, action) => {
     }
   }
 };
+
+let friendReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ADD_FRIEND: {
+      let newState = {
+        ...state,
+        user_friend: [...state.user_friend, action.payload],
+      };
+      return newState;
+    }
+    case EDIT_FRIEND: {
+      let {
+        id,
+        user_id,
+        name,
+        emoji,
+        wishful_city,
+        fav_memory,
+        timestamp,
+      } = action.payload;
+      let newState = {
+        ...state,
+      };
+      newState.user_friend.map((friend) => {
+        if (friend.id === id) {
+          friend.emoji = emoji;
+          friend.wishful_city = wishful_city;
+          friend.fav_memory = fav_memory;
+        }
+      });
+      return newState;
+    }
+    case DELETE_FRIEND: {
+      let { id } = action.payload;
+      let newState = { ...state };
+      newState.user_friend = newState.user_friend.filter(
+        (friend) => friend.id !== id
+      );
+      return newState;
+    }
+    default: {
+      return state;
+    }
+  }
+};
 let rootReducer = Redux.combineReducers({
+  friendReducer,
   orderReducer,
   userReducer,
 });
@@ -236,10 +292,43 @@ let add_user = {
     },
   },
 };
-
+let add_friend = {
+  type: ADD_FRIEND,
+  payload: {
+    id: 4,
+    user_id: 2,
+    name: "Dad",
+    emoji: "dad",
+    wishful_city: "Australia",
+    fav_memory: "taking naps",
+    timestamp: "",
+  },
+};
+let edit_friend = {
+  type: EDIT_FRIEND,
+  payload: {
+    id: 4,
+    user_id: 2,
+    name: "Dad",
+    emoji: "chill dad",
+    wishful_city: "New zealand",
+    fav_memory: "skiing",
+    timestamp: "",
+  },
+};
+let delete_friend = {
+  type: DELETE_FRIEND,
+  payload: {
+    id: 4,
+  },
+};
 // call the action
 store.dispatch(edit_croissant_order);
 store.dispatch(delete_order);
 store.dispatch(edit_user);
 store.dispatch(delete_user);
 store.dispatch(add_user);
+console.log("Add friend");
+store.dispatch(add_friend);
+store.dispatch(edit_friend);
+store.dispatch(delete_friend);
