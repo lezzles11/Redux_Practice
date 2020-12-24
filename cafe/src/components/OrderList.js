@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { deleteOrder } from "../redux/actions/orderActions";
 
 class OrderList extends Component {
   /**********************************************
@@ -9,6 +10,9 @@ class OrderList extends Component {
    ***********************************************/
   deleteOrder = (event) => {
     console.log(
+      parseInt(event.target.getAttribute("data-id"))
+    );
+    this.props.deleteOrder(
       parseInt(event.target.getAttribute("data-id"))
     );
   };
@@ -56,4 +60,6 @@ class OrderList extends Component {
 const mapStateToProps = (state) => ({
   orders: state.orders,
 });
-export default connect(mapStateToProps, null)(OrderList);
+export default connect(mapStateToProps, { deleteOrder })(
+  OrderList
+);

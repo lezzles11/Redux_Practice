@@ -16,6 +16,9 @@ const DELETE_FRIEND = "DELETE_FRIEND";
 const ADD_CATEGORY = "ADD_CATEGORY";
 const EDIT_CATEGORY = "EDIT_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
+const ANSWERED_QUESTION = "ANSWERED_QUESTION";
+const FAVORITE_QUESTION = "FAVORITE_QUESTION";
+const DELETE_QUESTION = "DELETE_QUESTION";
 
 const initialState = {
   orders: [
@@ -99,6 +102,11 @@ const initialState = {
       name: "Love",
       timestamp: "",
     },
+    {
+      id: 3,
+      name: "Favorite",
+      timestamp: "",
+    },
   ],
   question: [
     {
@@ -124,6 +132,14 @@ const initialState = {
       user_friend_id: 1,
       question_id: 2,
       answered: true,
+      timestamp: "",
+    },
+  ],
+  user_fav_question: [
+    {
+      id: 1,
+      user_id: 1,
+      question_id: 1,
       timestamp: "",
     },
   ],
@@ -243,6 +259,53 @@ let friendReducer = (state = initialState, action) => {
     }
   }
 };
+
+/**********************************************
+ * What will be passed in here?
+ * ==================================
+ ***********************************************/
+// const ANSWERED_QUESTION = "ANSWERED_QUESTION";
+// const FAVORITE_QUESTION = "FAVORITE_QUESTION";
+// const DELETE_QUESTION = "DELETE_QUESTION";
+// // pass in id, user_id, user_friend_id, question_id, answered, timestamp
+// let questionReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case ANSWERED_QUESTION: {
+//       let newState = {
+//         ...state,
+//         user_friend_all_questions: [
+//           ...state.user_friend_all_questions,
+//           action.payload,
+//         ],
+//       };
+//       return newState;
+//     }
+//     case FAVORITE_QUESTION: {
+//       let {
+//         id,
+//         user_id,
+//         user_friend_id,
+//         question_id,
+//         answered,
+//         timestamp,
+//       } = action.payload;
+//       let newState = {
+//         ...state,
+//       };
+
+//       newState.user_friend_all_questions.map((question) => {
+//         if (question.id === id) {
+//           question.answered = true;
+//         }
+//       });
+//       return newState;
+//     }
+//     default: {
+//       return state;
+//     }
+//   }
+// };
+
 let rootReducer = Redux.combineReducers({
   friendReducer,
   orderReducer,
@@ -320,6 +383,28 @@ let delete_friend = {
   type: DELETE_FRIEND,
   payload: {
     id: 4,
+  },
+};
+let answer_question = {
+  type: ANSWERED_QUESTION,
+  payload: {
+    id: 1,
+    user_id: 1,
+    user_friend_id: 1,
+    question_id: 1,
+    answered: true,
+    timestamp: "",
+  },
+};
+let favorite_question = {
+  type: FAVORITE_QUESTION,
+  payload: {
+    id: 1,
+    user_id: 1,
+    user_friend_id: 1,
+    question_id: 1,
+    answered: true,
+    timestamp: "",
   },
 };
 // call the action
