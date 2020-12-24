@@ -161,11 +161,15 @@ this.loadOrders = this.loadOrders.bind(this);
 - DeleteOrder
 - ==================================
 - The purpose of this method is to delete the order - but first let's console.log the attribute
-  deleteOrder = (event) => {
-  console.log(
-  parseInt(event.target.getAttribute("data-id"))
-  );
-  };
+
+```
+ deleteOrder = (event) => {
+ console.log(
+ parseInt(event.target.getAttribute("data-id"))
+ );
+ };
+```
+
 - LoadOrders
 - ==================================
 - The purpose of this method is to turn an array of orders into a list
