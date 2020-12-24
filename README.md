@@ -118,8 +118,8 @@ store.dispatch(delete_order);
 - [ ] If you are rendering a list, create a function in which you can pass it an array, and then make it list out all the different objects accordingly
 - [ ] If you are creating a form, then ensure that you can pass in the
       E.g.,
- 
- ```
+
+```
 class OrderForm extends Component {
 constructor(props) {
 super(props);
@@ -142,7 +142,6 @@ console.log(this.state);
 
 - [ ] Ensure by first giving it fake data (e.g., )
 
-
 ```
 class OrderList extends Component {
 constructor(props) {
@@ -158,9 +157,10 @@ this.deleteOrder = this.deleteOrder.bind(this);
 this.loadOrders = this.loadOrders.bind(this);
 }
 ```
+
 - DeleteOrder
 - ==================================
-- The purpose of this method is to delete the order - but first let's console.log the attribute 
+- The purpose of this method is to delete the order - but first let's console.log the attribute
   deleteOrder = (event) => {
   console.log(
   parseInt(event.target.getAttribute("data-id"))
@@ -168,8 +168,9 @@ this.loadOrders = this.loadOrders.bind(this);
   };
 - LoadOrders
 - ==================================
-- The purpose of this method is to turn an array of orders into a list 
-- 
+- The purpose of this method is to turn an array of orders into a list
+
+```
   loadOrders = (orders) => {
   let list = [];
   for (let i = 0; i < orders.length; i++) {
