@@ -17,7 +17,7 @@ The purpose of this repository is to have a series of redux examples to refer to
 - [ ] Make sure all components accept props
 - [ ] Ensure by first giving it fake data
 - [ ] For functions, create the appropriate method, then pass state of the array into the method accordingly
-- [ ] 
+- [ ]
 
 ### Where it fits :paperclip:
 
@@ -118,7 +118,8 @@ store.dispatch(delete_order);
 - [ ] If you are rendering a list, create a function in which you can pass it an array, and then make it list out all the different objects accordingly
 - [ ] If you are creating a form, then ensure that you can pass in the
       E.g.,
-
+ 
+ ```
 class OrderForm extends Component {
 constructor(props) {
 super(props);
@@ -137,19 +138,12 @@ console.log(this.state);
 
 } ...
 }
-
-```
-
-to
-
-```
-
 ```
 
 - [ ] Ensure by first giving it fake data (e.g., )
 
-```
 
+```
 class OrderList extends Component {
 constructor(props) {
 super(props);
@@ -163,20 +157,19 @@ orders: [
 this.deleteOrder = this.deleteOrder.bind(this);
 this.loadOrders = this.loadOrders.bind(this);
 }
-/\***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***
-
+```
 - DeleteOrder
 - ==================================
-- The purpose of this method is to delete the order - but first let's console.log the attribute \***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***/
+- The purpose of this method is to delete the order - but first let's console.log the attribute 
   deleteOrder = (event) => {
   console.log(
   parseInt(event.target.getAttribute("data-id"))
   );
   };
-  /\***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***
 - LoadOrders
 - ==================================
-- The purpose of this method is to turn an array of orders into a list \***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***/
+- The purpose of this method is to turn an array of orders into a list 
+- 
   loadOrders = (orders) => {
   let list = [];
   for (let i = 0; i < orders.length; i++) {
@@ -258,4 +251,7 @@ Please make sure to update tests as appropriate.
 #### License :memo:
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+```
+
 ```
