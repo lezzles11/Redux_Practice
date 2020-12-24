@@ -1,0 +1,9 @@
+export const NEW_ORDER = "NEW_ORDER";
+export const EDIT_ORDER = "EDIT_ORDER";
+export const DELETE_ORDER = "DELETE_ORDER";
+export const CHANGE_AGE = "CHANGE_AGE";
+export const ADD_USER = "ADD_USER";
+export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
+export const GET_USER = "GET_USER";
+export const DELETE_USER = "DELETE_USER";
+export const GET_ALL_USERS = "GET_ALL_USERS";

@@ -1,14 +1,27 @@
 console.log("Hello redux");
 // Initial State
-// #TODO: Create user reducer
-// #TODO: Create question reducer
-let initialState = {
+
+const NEW_ORDER = "NEW_ORDER";
+const EDIT_ORDER = "EDIT_ORDER";
+const DELETE_ORDER = "DELETE_ORDER";
+const CHANGE_AGE = "CHANGE_AGE";
+const ADD_USER = "ADD_USER";
+const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
+const GET_USER = "GET_USER";
+const DELETE_USER = "DELETE_USER";
+const GET_ALL_USER_TABLE = "GET_ALL_USER_TABLE";
+const ADD_FRIEND = "ADD_FRIEND";
+const EDIT_FRIEND = "EDIT_FRIEND";
+const DELETE_FRIEND = "DELETE_FRIEND";
+
+
+const initialState = {
   orders: [
     { id: 1, order: "Coffee", amount: 1 },
     { id: 2, order: "Croissant", amount: 5 },
     { id: 3, order: "Sandwich", amount: 10 },
   ],
-  users: [
+  user_table: [
     {
       id: 1,
       email: "lesleyc@bu.edu",
@@ -34,21 +47,80 @@ let initialState = {
       timestamp: "",
     },
   ],
+  user_friend: [
+    {
+      id: 1,
+      user_id: 1,
+      name: "Genny",
+      emoji: "grandma",
+      wishful_city: "Denmark",
+      fav_memory: "Writing stories as children together",
+      timestamp: "",
+    },
+    {
+      id: 2,
+      user_id: 2,
+      name: "Graham",
+      emoji: "young banker",
+      wishful_city: "London",
+      fav_memory: "Chilling ",
+      timestamp: "",
+    },
+    {
+      id: 3,
+      user_id: 3,
+      name: "Gerald",
+      emoji: "Baker",
+      wishful_city: "Holland",
+      fav_memory: "Talking about stuffed animals",
+      timestamp: "",
+    },
+  ],
+  category: [
+    {
+      id: 1,
+      name: "Family",
+      timestamp: "",
+    },
+    {
+      id: 2,
+      name: "Friends",
+      timestamp: "",
+    },
+    {
+      id: 3,
+      name: "Love",
+      timestamp: "",
+    },
+    {
+      id: 3,
+      name: "Love",
+      timestamp: "",
+    },
+  ],
+  question: [
+    {
+      id: 1,
+      category_id: 1,
+      question_string: "question1",
+      photo_url: "",
+      timestamp: "",
+    },
+  ],
+  user_friend_all_questions: [
+    {
+      id: 1,
+      user_id: 1,
+      user_friend_id: 1,
+      question_id: 1,
+      answered: true,
+      timestamp: "",
+    },
+  ],
 };
-
-const NEW_ORDER = "NEW_ORDER";
-const EDIT_ORDER = "EDIT_ORDER";
-const DELETE_ORDER = "DELETE_ORDER";
-const CHANGE_AGE = "CHANGE_AGE";
-const ADD_USER = "ADD_USER";
-const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
-const GET_USER = "GET_USER";
-const DELETE_USER = "DELETE_USER";
-const GET_ALL_USERS = "GET_ALL_USERS";
 
 // reducer - thing that changes the state
 let orderReducer = (state = initialState, action) => {
-  console.log("Order reducer, state: ", state.orders);
   switch (action.type) {
     case NEW_ORDER: {
       let newState = {
@@ -85,19 +157,18 @@ let orderReducer = (state = initialState, action) => {
 };
 
 let userReducer = (state = initialState, action) => {
-  console.log("User reducer: ", state.users);
   switch (action.type) {
     case ADD_USER: {
       let newState = {
         ...state,
-        users: [...state.users, action.payload],
+        user_table: [...state.user_table, action.payload],
       };
       return newState;
     }
     case EDIT_USER_PASSWORD: {
       let { id, password } = action.payload;
       let newState = { ...state };
-      newState.users.map((item) => {
+      newState.user_table.map((item) => {
         if (item.id === id) {
           item.password = password;
         }
@@ -107,7 +178,7 @@ let userReducer = (state = initialState, action) => {
     case DELETE_USER: {
       let { id } = action.payload;
       let newState = { ...state };
-      newState.users = newState.users.filter(
+      newState.user_table = newState.user_table.filter(
         (user) => user.id !== id
       );
       return newState;
@@ -117,7 +188,6 @@ let userReducer = (state = initialState, action) => {
     }
   }
 };
-
 let rootReducer = Redux.combineReducers({
   orderReducer,
   userReducer,

@@ -1,39 +1,11 @@
 console.log("Let's go, work husband");
-
-const ADD_USER = "ADD_USER";
-const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
-const GET_USER = "GET_USER";
-const DELETE_USER = "DELETE_USER";
-const GET_ALL_USERS = "GET_ALL_USERS";
-
-let initalState = {
-  users: [
-    {
-      id: 1,
-      email: "lesleyc@bu.edu",
-      password: "password",
-      spotify_id: "spotify_id",
-      spotify_access_token: "spotify_access_token",
-      timestamp: "",
-    },
-    {
-      id: 2,
-      email: "ryan@bu.edu",
-      password: "password",
-      spotify_id: "spotify_id",
-      spotify_access_token: "spotify_access_token",
-      timestamp: "",
-    },
-    {
-      id: 3,
-      email: "robert@bu.edu",
-      password: "password",
-      spotify_id: "spotify_id",
-      spotify_access_token: "spotify_access_token",
-      timestamp: "",
-    },
-  ],
-};
+import {
+  ADD_USER,
+  EDIT_USER_PASSWORD,
+  GET_USER,
+  DELETE_USER,
+  GET_ALL_USERS,
+} from "./types.js";
 
 let userReducer = (state = initialState, action) => {
   console.log("User reducer: ", state.users);
@@ -68,7 +40,6 @@ let userReducer = (state = initialState, action) => {
     }
   }
 };
-
 let edit_user = {
   type: EDIT_USER_PASSWORD,
   payload: { id: 1, password: "newPassword" },
