@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteOrder } from "../redux/actions/orderActions";
-
+import {
+  deleteOrder,
+  submitOrder,
+} from "../redux/actions/orderActions";
+import PropTypes from "prop-types";
 class OrderList extends Component {
+  /**********************************************
+   *
+   * ==================================
+   ***********************************************/
+  pushItemsAsOrder = () => {
+    this.props.submitOrder({
+      customer: this.props.customers.find(
+        (customer) => customer.selected
+      ).id,
+      time: new Date().toLocaleTimeString(),
+      list: this.props.orders,
+    });
+  };
   /**********************************************
    * DeleteOrder
    * ==================================
@@ -52,14 +68,28 @@ class OrderList extends Component {
       <div>
         <h6>List of orders</h6>
         {this.loadOrders(orders)}
+
+        <button
+          onClick={this.pushItemsAsOrder}
+          type="button"
+          className="btn btn-outline-dark waves-effect"
+        >
+          Submit Order
+        </button>
       </div>
     );
   }
 }
+OrderList.propTypes = {
+  orders: PropTypes.array.isRequired,
+  deleteOrder: PropTypes.func.isRequired,
+};
 // This is taken from the reducers
 const mapStateToProps = (state) => ({
   orders: state.orders,
+  customers: state.customers,
 });
-export default connect(mapStateToProps, { deleteOrder })(
-  OrderList
-);
+export default connect(mapStateToProps, {
+  deleteOrder,
+  submitOrder,
+})(OrderList);

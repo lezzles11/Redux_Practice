@@ -15,5 +15,6 @@ class OrderCounter extends Component {
 
 const mapStateToProps = (state) => ({
   count: state.orders.length,
-});
+} );
+
 export default connect(mapStateToProps, null)(OrderCounter);
